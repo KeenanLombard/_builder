@@ -1,7 +1,7 @@
 <!-- @format -->
 
 <template>
-  <div></div>
+  <div>Blocks</div>
 </template>
 
 <script>
