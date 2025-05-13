@@ -3,14 +3,34 @@
 <template>
   <div>
     <div v-if="!isLoading">
-      <Header title="Projects" subtitle="Manage your projects" />
+      <Header title="Projects" subtitle="Manage your projects">
+        <!-- <button
+          @click="$router.push('/project/new-project')"
+          class="px-4 py-2 bg-indigo-500 text-white rounded hover:bg-indigo-600">
+          + New Project
+        </button> -->
+      </Header>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div
+          @click="$router.push('/project/new-project')"
+          class="bg-gray-50 rounded-lg border-2 border-dashed border-gray-300 flex flex-col items-center justify-center p-6 hover:border-indigo-500 hover:bg-gray-100 transition duration-300 cursor-pointer h-full">
+          <div class="rounded-full bg-indigo-100 p-3">
+            <i class="fas fa-plus text-indigo-600 text-lg"></i>
+          </div>
+          <p class="mt-2 text-sm font-medium text-gray-900">
+            Create New Project
+          </p>
+          <p class="text-xs text-gray-500 text-center mt-1">
+            Click to add a new project to your portfolio
+          </p>
+        </div>
         <div v-for="(project, index) in projects" :key="index">
           <ProjectCard
             @delete="handleDeleteEmit(project.id)"
             :project="project" />
         </div>
       </div>
+
       <Modal :show="modal" @close="modal = false">
         <template #header>
           <h3 class="text-xl font-semibold text-center mb-2">Delete Project</h3>
