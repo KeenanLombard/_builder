@@ -2,7 +2,7 @@
 
 <template>
   <div>
-    <Header title="Settings" subtitle="Get insights into your data" />
+    <Header title="Profile" subtitle="Get insights into your data" />
     <pre>{{ email }}</pre>
   </div>
 </template>
