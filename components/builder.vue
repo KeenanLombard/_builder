@@ -24,7 +24,7 @@ const editor = ref(null);
 
 const saveProject = async (project) => {
   try {
-    const newItem = { project_code: project };
+    const newItem = { project_code: JSON.stringify(project) };
     await updateItem({
       collection: "projects",
       id: route.params.id,
@@ -42,11 +42,23 @@ onMounted(() => {
     plugins: [(editor) => console.log("editor created!", editor)],
     storage: {
       type: "self",
-      autosaveChanges: 10,
+      autosaveChanges: 5,
       project: props.project_data,
-      onSave: async ({ project }) => saveProject(project),
+      onLoad: async () => {
+        console.log("onLoad triggered");
+        return props.project_data;
+      },
+      onStore: async ({ project }) => {
+        console.log("onStore triggered", project);
+        await saveProject(project);
+      },
+      onSave: async ({ project }) => {
+        console.log("onSave triggered", project);
+        await saveProject(project);
+      },
     },
   });
+  console.log("Editor instance:", editor.value);
 });
 </script>
 
