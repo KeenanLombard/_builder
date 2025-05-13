@@ -72,6 +72,7 @@
 
     <div class="flex justify-end mb-4 mx-6">
       <button
+        @click.stop="$emit('delete', project)"
         class="bg-red-100 text-red-900 hover:bg-red-200 cursor-pointer font-semibold px-3 py-2 rounded-xl">
         <svg
           xmlns="http://www.w3.org/2000/svg"
