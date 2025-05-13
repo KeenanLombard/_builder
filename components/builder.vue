@@ -3,7 +3,7 @@
 <template>
   <div>
     <div class="cnt">
-      <div class="cnt-nav">SDK example Nuxt</div>
+      <!-- <div class="cnt-nav">SDK example Nuxt</div> -->
       <div class="cnt-body">
         <div class="editor" ref="editor"></div>
       </div>
@@ -15,9 +15,26 @@
 import createStudioEditor from "@grapesjs/studio-sdk";
 import "@grapesjs/studio-sdk/dist/style.css";
 
+const { updateItem } = useDirectusItems();
+const route = useRoute();
+
 const props = defineProps(["project_data"]);
 
 const editor = ref(null);
+
+const saveProject = async (project) => {
+  try {
+    const newItem = { project_code: project };
+    await updateItem({
+      collection: "projects",
+      id: route.params.id,
+      item: newItem,
+    });
+    console.log("Project Saved");
+  } catch (error) {
+    alert(error);
+  }
+};
 
 onMounted(() => {
   createStudioEditor({
@@ -27,7 +44,7 @@ onMounted(() => {
       type: "self",
       autosaveChanges: 10,
       project: props.project_data,
-      onSave: async ({ project }) => console.log("Save project", { project }),
+      onSave: async ({ project }) => saveProject(project),
     },
   });
 });
@@ -42,11 +59,11 @@ body {
   flex-direction: column;
   height: 100dvh;
 }
-.cnt-nav {
+/* .cnt-nav {
   padding: 10px;
   background-color: #020420;
   color: #00dc82;
-}
+} */
 .cnt-body {
   flex-grow: 1;
 }

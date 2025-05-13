@@ -3,26 +3,10 @@
 <template>
   <div>
     <div v-if="!isLoading">
-      <Header title="Projects" subtitle="View all your projects" />
-      <div v-for="(project, index) in projects" :key="index">
-        <div
-          @click="() => $router.push('/project/' + project.id)"
-          class="flex justify-between items-center m-5 p-5 bg-indigo-100 rounded-lg">
-          <div>
-            <p>ID: {{ project.id }}</p>
-            <p>NAME: {{ project.name }}</p>
-            <p>DESC: {{ project.description }}</p>
-            <p>STATUS: {{ project.status }}</p>
-            <p>DC: {{ project.date_created }}</p>
-            <p>DU: {{ project.date_updated }}</p>
-            <p>UC: {{ project.user_created }}</p>
-            <p>UU: {{ project.user_updated }}</p>
-          </div>
-          <div>
-            <button class="bg-red-400 p-1 rounded text-white font-semibold">
-              DELETE
-            </button>
-          </div>
+      <Header title="Projects" subtitle="Manage your projects" />
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div v-for="(project, index) in projects" :key="index">
+          <ProjectCard :project="project" />
         </div>
       </div>
     </div>
@@ -52,7 +36,7 @@ const fetchProjects = async () => {
   }
 };
 
-onMounted(async () => {
+onBeforeMount(async () => {
   projects.value = await fetchProjects();
 });
 </script>

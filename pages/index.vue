@@ -2,7 +2,7 @@
 
 <template>
   <div>
-    <Nav />
+    <Header title="Dashboard" subtitle="Get insights into your data" />
   </div>
 </template>
 

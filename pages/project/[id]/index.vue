@@ -3,8 +3,7 @@
 <template>
   <div>
     <div v-if="!isLoading">
-      <Header :title="project.name" :subtitle="project.date_created" />
-      <Builder :project_data="project.project_code" />
+      <Builder v-if="project" :project_data="project.project_code" />
     </div>
     <div v-else>Loading...</div>
   </div>
@@ -14,6 +13,10 @@
 import { ref, onMounted } from "vue";
 const { getItemById } = useDirectusItems();
 const route = useRoute();
+
+definePageMeta({
+  layout: "builder",
+});
 
 const project = ref(null);
 const isLoading = ref(true);
