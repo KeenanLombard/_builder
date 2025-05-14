@@ -98,7 +98,7 @@
 const { createItems } = useDirectusItems();
 const { getItems } = useDirectusItems();
 
-const router = useRouter()
+const router = useRouter();
 
 const name = ref("");
 const description = ref("");
@@ -110,44 +110,46 @@ const handleImageUpload = (event) => {
   const file = event.target.files[0];
   if (file) {
     imageName.value = file;
-    console.log(file)
+    console.log(file);
   } else {
     imageName.value = "";
   }
 };
 
-const handleCreateProject = async() => {
+const handleCreateProject = async () => {
   try {
-
     //upload image first and refer to id in payload
 
     if (name.value === "" || description.value === "") {
       alert("Please fill in all fields");
       return;
+    } else if (name.value === "Blank Website") {
+      alert("Please select a diffrent name");
+      return;
     } else {
-          const items = [
-      {
-        name: name.value,
-        description: description.value,
-        project_code: templates.value[selected.value].template_code,
-        // cover_image: imageName.value,
-        status: "draft",
-      },
-    ];
+      const items = [
+        {
+          name: name.value,
+          description: description.value,
+          project_code: templates.value[selected.value].template_code,
+          // cover_image: imageName.value,
+          status: "draft",
+        },
+      ];
       await createItems({ collection: "projects", items });
       router.push("/project/projects");
     }
-    } catch (e) {
-      alert("Error creating project: " + e.message);
-    }
+  } catch (e) {
+    alert("Error creating project: " + e.message);
+  }
 };
 
-onMounted(async() => {
-    try {
+onMounted(async () => {
+  try {
     const items = await getItems({
       collection: "templates",
     });
-      templates.value.push(...items);
+    templates.value.push(...items);
     console.log(templates.value);
   } catch (e) {}
 });
