@@ -24,7 +24,7 @@
             Click to add a new project to your portfolio
           </p>
         </div>
-        <div v-for="(project, index) in projects" :key="index">
+        <div v-for="project in projects" :key="project.id">
           <ProjectCard
             @delete="handleDeleteEmit(project.id)"
             :project="project" />
@@ -80,10 +80,13 @@ const deleteProject = async () => {
   try {
     const items = [selectedProject.value];
     await deleteItems({ collection: "projects", items });
-    projects.value = projects.value.filter(
-      (project) => project.id !== selectedProject.value
-    );
+       if (Array.isArray(projects.value)) {
+      projects.value = projects.value.filter(
+        (project) => project.id !== selectedProject.value
+      );
+    };
     modal.value = false;
+    selectedProject.value = null;
   } catch (e) {}
 };
 
