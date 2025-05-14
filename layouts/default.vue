@@ -77,6 +77,11 @@
                   class="text-gray-500 hover:bg-gray-100 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
                   >Projects</a
                 >
+                <a
+                  href="/template/templates"
+                  class="text-gray-500 hover:bg-gray-100 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
+                  >Templates</a
+                >
               </div>
             </div>
           </div>

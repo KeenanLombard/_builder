@@ -37,6 +37,8 @@ const fetchProject = async () => {
 };
 
 onMounted(async () => {
+  isLoading.value = true;
+  // Fetch the project data when the component is mounted
   project.value = await fetchProject();
   console.log(project.value);
 });

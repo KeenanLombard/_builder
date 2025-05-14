@@ -9,9 +9,8 @@
 
 <script setup>
 const user = useDirectusUser();
-const email = ref(null);
 
-onMounted(async () => {
-  email.value = user;
+onMounted(() => {
+  console.log(user.value)
 });
 </script>
